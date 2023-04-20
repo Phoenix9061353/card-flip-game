@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Simple Game</title>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <div class="container" id="main">
+      <h1 class="heading">Card Game</h1>
+      <div class="card-container"></div>
+      <button class="btn btn--option-1">4 cards</button>
+      <button class="btn btn--option-2">12 cards</button>
+      <button class="btn btn--option-3 hide">Back to Home</button>
+      <button class="btn btn--option-4 hide">Restart (Same Mode)</button>
+    </div>
+    <a href="#rule" class="howToPlay">How to Play</a>
+    <div class="rule" id="rule">
+      <div class="rule__content">
+        <a href="#main" class="rule__close">&times;</a>
+        <h3 class="rule__header">玩法說明</h3>
+        <ul class="rule__list">
+          <li class="rule__things">
+            一開始在主頁上的按鈕可以選擇模式（4張牌或12張牌），點選後遊戲開始
+          </li>
+          <li class="rule__things">
+            玩法為配對消消樂：<br />翻牌後可查看顏色，若選到兩張牌都是相同顏色即配對成功；反之，則回到蓋牌的狀態<br />
+            直到畫面上的牌都配對完成後，遊戲成功
+          </li>
+          <li class="rule__things">
+            遊戲結束後可選擇是否以相同模式再進行一次遊戲，或者是回到一開始的畫面選擇以另一種模式進行遊戲
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
