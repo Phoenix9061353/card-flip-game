@@ -107,6 +107,7 @@ body {
   background-color: #775332;
   color: #fff;
   font-size: 2.75rem;
+  font-weight: 600;
   padding: 1.25rem 2.5rem;
   border-radius: 3px;
   cursor: pointer;
@@ -118,13 +119,40 @@ body {
   top: 40%;
   left: 30%;
 }
+@media screen and (max-width: 600px) {
+  .btn--option-1, .btn--option-3 {
+    top: 40%;
+    left: 50%;
+  }
+}
 .btn--option-2, .btn--option-4 {
   top: 40%;
   left: 70%;
 }
+@media screen and (max-width: 600px) {
+  .btn--option-2, .btn--option-4 {
+    top: 55%;
+    left: 50%;
+  }
+}
 .btn:hover {
   transform: translate(-50%, -3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 1000px) {
+  .btn {
+    font-size: 2.25rem;
+  }
+}
+@media screen and (max-width: 800px) {
+  .btn {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .btn {
+    font-size: 1.8rem;
+  }
 }
 
 .howToPlay {
@@ -146,6 +174,11 @@ body {
 .howToPlay:hover {
   color: #fff;
   background-color: #775332;
+}
+@media screen and (max-width: 800px) {
+  .howToPlay {
+    font-size: 1.75rem;
+  }
 }
 
 .rule {
@@ -170,6 +203,16 @@ body {
   transform: translateX(-75%);
   opacity: 0;
 }
+@media screen and (max-width: 800px) {
+  .rule__content {
+    width: 60vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .rule__content {
+    width: 100vw;
+  }
+}
 .rule__header {
   font-size: 2.5rem;
   margin: 1.5rem 0;
@@ -180,8 +223,8 @@ body {
   line-height: 1.7;
 }
 .rule__close:link, .rule__close:visited {
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: 5rem;
+  font-weight: 700;
   text-decoration: none;
   color: #333;
   transition: all 0.2s;
