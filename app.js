@@ -3,6 +3,9 @@ const btnOp2 = document.querySelector('.btn--option-2');
 const btnOp3 = document.querySelector('.btn--option-3');
 const btnOp4 = document.querySelector('.btn--option-4');
 let btns = document.querySelectorAll('.btn');
+const heading = document.querySelector('.heading');
+const timerConatiner = document.querySelector('.timer-container');
+const resultText = document.querySelector('.result-text');
 
 const containerCard = document.querySelector('.card-container');
 let cards = document.querySelectorAll('.card');
@@ -19,6 +22,8 @@ const cardSet = [
 let cardSet1 = cardSet.slice(0, 2).concat(cardSet.slice(0, 2));
 let cardSet2 = cardSet.concat(cardSet);
 let firstCard, secondCard, priviousSelect;
+let finishGame = false;
+let timerStart;
 
 //game mode, 配對數量, 翻牌數量
 let gameMode = 0,
@@ -72,14 +77,42 @@ const setCard = function (mode) {
   cards.forEach((c) => c.addEventListener('click', (e) => flipCard(e)));
 };
 
+//計時
+let time = 0;
+const timer = document.querySelector('.time');
+const getTime = function () {
+  const tick = () => {
+    let dSec = String(time % 10);
+    let sec = String(Math.floor(time / 10) % 60).padStart(2, 0);
+    let min = String(Math.floor(time / 600)).padStart(2, 0);
+
+    timer.textContent = `${min}:${sec}.${dSec}`;
+    if (finishGame) {
+      clearInterval(setTimer);
+    }
+    time++;
+  };
+  tick();
+  const setTimer = setInterval(tick, 100);
+  return setTimer;
+};
+
 //開啟遊戲（依選擇的模式）
 const playGame = function (mode) {
+  time = 0;
+  heading.classList.add('matched');
+  timerConatiner.classList.remove('matched');
+  resultText.classList.add('hide');
+  finishGame = false;
   gameMode = mode;
   containerCard.classList.add(gameMode === 1 ? 'grid-2r-2c' : 'grid-3r-4c');
   setCard(gameMode === 1 ? 4 : 12);
   btns.forEach((b) => {
     b.classList.add('hide');
   });
+  if (timerStart) clearInterval(timerStart);
+
+  setTimeout((timerStart = getTime()), 1000);
 };
 
 //詢問重啟或回到主頁（不論如何，重設整個card）
@@ -96,6 +129,9 @@ const restartOrNot = function (select) {
   if (select === 1) {
     gameMode = 0;
     btns.forEach((b) => b.classList.toggle('hide'));
+    resultText.classList.add('hide');
+    heading.classList.remove('matched');
+    timerConatiner.classList.add('matched');
   } else {
     playGame(gameMode);
   }
@@ -122,7 +158,9 @@ const isMatched = function () {
     counter = 0;
     matched += 1;
     if (matched === (gameMode === 1 ? 2 : 6)) {
-      alert('You Win!🏅');
+      if (timerStart) clearInterval(timerStart);
+      resultText.classList.remove('hide');
+      finishGame = true;
       askRestart();
     }
   }, 200);
